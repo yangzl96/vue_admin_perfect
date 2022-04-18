@@ -14,6 +14,11 @@ export default {
   components: {
     HelloWorld
   },
+  data() {
+    return {
+      a: 'xxxx'
+    }
+  },
   created() {
     console.log(111)
   }
