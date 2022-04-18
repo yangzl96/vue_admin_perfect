@@ -19,6 +19,7 @@ export default {
       a: 'xxxx',
       b: 'xxxx',
       b: 'xxxx',
+      b: 'xxxx',
     }
   },
   created() {
