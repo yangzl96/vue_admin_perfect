@@ -9,7 +9,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@commitlint/cli": "12.1.4",
+    "@commitlint/config-conventional": "12.1.4",
     "core-js": "^3.6.5",
+    "husky": "7.0.1",
     "vue": "^3.2.8",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
@@ -38,8 +41,8 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
-      "vue-cli-service lint",
+    "src/**/*.{js,vue}": [
+      "eslint --fix",
       "git add"
     ]
   },
