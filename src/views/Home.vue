@@ -16,10 +16,7 @@ export default {
   },
   data() {
     return {
-      a: 'xxxx',
-      b: 'xxxx',
-      b: 'xxxx',
-      b: 'xxxx',
+      a: 'xxxx'
     }
   },
   created() {
