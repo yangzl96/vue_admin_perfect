@@ -16,7 +16,8 @@ export default {
   },
   data() {
     return {
-      a: 'xxxx'
+      a: 'xxxx',
+      b: 'xxxx'
     }
   },
   created() {
