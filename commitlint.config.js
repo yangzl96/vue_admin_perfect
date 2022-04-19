@@ -15,15 +15,15 @@ module.exports = {
         'fix', // 修复 bug
         'refactor', // 重构（既不增加新功能，也不是修复Bug）
         'style', // 代码格式（不影响代码运行的变动）
-        'docs', //文档注释
+        'docs', // 文档注释
         'perf', // 性能优化
         'test', // 增加测试
-        'build', //打包
-        'revert', //回退
-        'chore', // 构建过程或辅助工具的变动
+        'build', // 打包
+        'revert', // 回退
+        'chore' // 构建过程或辅助工具的变动
       ]
     ],
     // 大小写不做校验
     'subject-case': [0]
   }
-};
+}
