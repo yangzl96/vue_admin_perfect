@@ -4,6 +4,18 @@ function resolve(dir) {
 }
 
 module.exports = {
+  devServer: {
+    proxy: {
+      // 碰到 /api 就将 /api 前面的(包括/api)都替换成下面这个路径
+      '/api': {
+        target: 'http://127.0.0.1:3001/v1',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
+  },
   chainWebpack(config) {
     // 设置 svg-sprite-loader
     config.module
