@@ -1,36 +1,40 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" ref="form" :model="form">
+    <el-form
+      class="login-form"
+      ref="form"
+      :model="loginForm"
+      :rules="loginRules"
+    >
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="svg-container">
           <el-icon>
-            <avatar />
+            <svg-icon icon="user"></svg-icon>
           </el-icon>
         </span>
         <el-input
           placeholder="username"
           name="username"
-          v-model="model"
+          v-model="loginForm.username"
         ></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="password"></svg-icon>
         </span>
         <el-input
           placeholder="password"
           name="password"
-          v-model="model"
+          :type="passwordType"
+          v-model="loginForm.password"
         ></el-input>
-        <span class="show-pwd">
-          <el-icon>
-            <avatar />
-          </el-icon>
+        <span class="show-pwd" @click="changePasswordType">
+          <svg-icon
+            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+          ></svg-icon>
         </span>
       </el-form-item>
       <el-button type="primary" style="width: 100%; margin-bottom: 30px"
@@ -41,7 +45,40 @@
 </template>
 
 <script setup>
-import { Avatar } from '@element-plus/icons'
+import { ref } from 'vue'
+import { validatePassword } from './rules'
+
+const loginForm = ref({
+  username: 'super-admin',
+  password: '123456'
+})
+// 表单校验
+const loginRules = ref({
+  username: [
+    {
+      required: true,
+      trigger: 'blur',
+      message: '用户名必填'
+    }
+  ],
+  password: [
+    {
+      required: true,
+      trigger: 'blur',
+      validator: validatePassword()
+    }
+  ]
+})
+
+// 处理密码框文本显示
+const passwordType = ref('password')
+const changePasswordType = () => {
+  if (passwordType.value === 'password') {
+    passwordType.value = 'text'
+  } else {
+    passwordType.value = 'password'
+  }
+}
 </script>
 
 <style lang="scss" scoped>
