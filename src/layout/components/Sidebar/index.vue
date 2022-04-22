@@ -18,11 +18,12 @@
 
 <script setup>
 import SidebarMenu from './SidebarMenu'
+const logoHeight = 44
 </script>
 
 <style lang="scss" scoped>
 .logo-container {
-  height: 44px;
+  height: v-bind(logoHeight) + 'px';
   padding: 10px 0 22px 0;
   display: flex;
   align-items: center;
