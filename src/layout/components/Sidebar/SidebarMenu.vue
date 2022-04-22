@@ -1,11 +1,13 @@
 <template>
   <!-- 一级 menu 菜单 -->
   <el-menu
+    router
+    :collapse="!$store.getters.sidebarOpened"
+    :default-active="activeMenu"
     :uniqueOpened="true"
-    default-active="2"
-    background-color="#545c64"
-    text-color="#fff"
-    active-text-color="#ffd04b"
+    :background-color="$store.getters.cssVar.menuBg"
+    :text-color="$store.getters.cssVar.menuText"
+    :active-text-color="$store.getters.cssVar.menuActiveText"
   >
     <!-- el-menu 下可以是 el-submenu(element-plus是el-sub-menu但是渲染出来很奇怪
     el-submenu是element的)，同时也可以是el-menu-item -->
@@ -16,7 +18,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { filterRouters, generateMenus } from '@/utils/route'
 import SidebarItem from './SidebarItem'
 
@@ -27,7 +29,12 @@ const routes = computed(() => {
   const filterRoutes = filterRouters(router.getRoutes())
   return generateMenus(filterRoutes)
 })
-console.log(JSON.stringify(routes.value))
+// 计算当前高亮的 menu
+const route = useRoute()
+const activeMenu = computed(() => {
+  const { path } = route
+  return path
+})
 </script>
 
 <style lang="scss" scoped></style>
