@@ -7,23 +7,27 @@
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <!-- 子集 menu 菜单 -->
-    <el-submenu index="1">
-      <template #title>
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-submenu>
-    <!-- 具体菜单项 -->
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <template #title>导航四</template>
-    </el-menu-item>
+    <!-- el-menu 下可以是 el-submenu(element-plus是el-sub-menu但是渲染出来很奇怪
+    el-submenu是element的)，同时也可以是el-menu-item -->
+    <sidebar-item v-for="item in routes" :key="item.path" :route="item">
+    </sidebar-item>
   </el-menu>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { filterRouters, generateMenus } from '@/utils/route'
+import SidebarItem from './SidebarItem'
+
+const router = useRouter()
+// routes: 处理好的route数据，去除了/login /404这些路由
+// 同时每个路由都有title icon 这两个属性
+const routes = computed(() => {
+  const filterRoutes = filterRouters(router.getRoutes())
+  return generateMenus(filterRoutes)
+})
+console.log(JSON.stringify(routes.value))
+</script>
 
 <style lang="scss" scoped></style>
