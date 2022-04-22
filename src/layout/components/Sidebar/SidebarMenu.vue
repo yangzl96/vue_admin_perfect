@@ -9,7 +9,8 @@
     :text-color="$store.getters.cssVar.menuText"
     :active-text-color="$store.getters.cssVar.menuActiveText"
   >
-    <!-- el-menu 下可以是 el-submenu(element-plus是el-sub-menu但是渲染出来很奇怪
+    <!-- el-menu 下可以是 el-submenu(element-plus是el-sub-menu但是渲染出来样式有问题
+    是版本的问题，需要升级element-plus
     el-submenu是element的)，同时也可以是el-menu-item -->
     <sidebar-item v-for="item in routes" :key="item.path" :route="item">
     </sidebar-item>
