@@ -3,6 +3,8 @@
     <hamburger class="hamburger-container" />
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 换肤 -->
+      <theme-picker class="right-menu-item hover-effect"></theme-picker>
       <!-- 语言选择 -->
       <lang-select class="right-menu-item hover-effect" />
       <!-- 头像 -->
@@ -38,6 +40,7 @@ import { useStore } from 'vuex'
 import Hamburger from '@/components/hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
+import ThemePicker from '@/components/ThemeSelect/index'
 
 const store = useStore()
 const logout = () => {
