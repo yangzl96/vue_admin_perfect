@@ -4,6 +4,14 @@ function resolve(dir) {
 }
 
 module.exports = {
+  configureWebpack: {
+    resolve: {
+      symlinks: false,
+      alias: {
+        vue: path.resolve('./node_modules/vue')
+      }
+    }
+  },
   devServer: {
     proxy: {
       // 碰到 /api 就将 /api 前面的(包括/api)都替换成下面这个路径

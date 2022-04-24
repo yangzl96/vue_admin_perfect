@@ -7,11 +7,11 @@
       >
         <!-- 最后一项不需要跳转 -->
         <span v-if="index === breadcrumbData.length - 1" class="no-redirect">
-          {{ item.meta.title }}
+          {{ generateTitle(item.meta.title) }}
         </span>
         <!-- 需要跳转的 -->
         <span v-else class="redirect" @click.prevent="onLinkClick(item)">
-          {{ item.meta.title }}
+          {{ generateTitle(item.meta.title) }}
         </span>
       </el-breadcrumb-item>
     </transition-group>
@@ -22,6 +22,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useStore } from 'vuex'
+import { generateTitle } from '@/utils/i18n'
 
 // 当前路由信息
 const route = useRoute()
