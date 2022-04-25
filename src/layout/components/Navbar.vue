@@ -3,6 +3,10 @@
     <hamburger class="hamburger-container" />
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 搜索 -->
+      <header-search class="right-menu-item hover-effect"></header-search>
+      <!-- 全屏 -->
+      <screenfull class="right-menu-item hover-effect" />
       <!-- 换肤 -->
       <theme-picker class="right-menu-item hover-effect"></theme-picker>
       <!-- 语言选择 -->
@@ -41,6 +45,8 @@ import Hamburger from '@/components/hamburger'
 import Breadcrumb from '@/components/Breadcrumb'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemeSelect/index'
+import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
 
 const store = useStore()
 const logout = () => {
