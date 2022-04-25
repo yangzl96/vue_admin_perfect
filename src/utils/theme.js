@@ -41,7 +41,7 @@ export const generateColors = primary => {
   }
   Object.keys(formula).forEach(key => {
     // 替换色值表中的 primary字符串 变成真实的 颜色变量
-    // 色值表中的 "color(primary shade(10%))" 'primary' 全部替换为主题色
+    // 例如 色值表中的 "color(primary shade(10%))" 将'primary' 全部替换为主题色
     const value = formula[key].replace(/primary/g, primary)
     // 生成16进制的色值
     colors[key] = '#' + rgbHex(color.convert(value))
