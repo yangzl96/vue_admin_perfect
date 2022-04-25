@@ -11,6 +11,8 @@ const getters = {
   userInfo: state => state.user.userInfo,
   cssVar: state => {
     return {
+      // 为了自动更新 所以取theme里面定义的
+      // 在theme里面触发state.variables的修改 让这里自动更新获取新的颜色
       ...state.theme.variables,
       ...generateColors(getItem(MAIN_COLOR))
     }

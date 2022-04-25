@@ -12,6 +12,7 @@ export default {
     // 设置主题色
     setMainColor(state, newColor) {
       state.mainColor = newColor
+      // 修改值，触发其他地方的更新
       state.variables.menuBg = newColor
       setItem(MAIN_COLOR, newColor)
     }
