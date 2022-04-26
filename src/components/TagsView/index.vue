@@ -1,30 +1,43 @@
 <template>
   <div class="tags-view-container">
-    <router-link
-      class="tags-view-item"
-      v-for="(tag, index) in $store.getters.tagsViewList"
-      :key="tag.fullPath"
-      :to="{ path: tag.fullPath }"
-      :class="isActive(tag) ? 'active' : ''"
-      :style="{
-        backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
-        borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
-      }"
-    >
-      {{ tag.title }}
-      <i
-        v-show="!isActive(tag)"
-        class="el-icon-close"
-        @click.prevent.stop="onCloseClick(index)"
-      ></i>
-    </router-link>
+    <el-scrollbar class="tags-view-wrapper">
+      <router-link
+        class="tags-view-item"
+        v-for="(tag, index) in $store.getters.tagsViewList"
+        :key="tag.fullPath"
+        :to="{ path: tag.fullPath }"
+        :class="isActive(tag) ? 'active' : ''"
+        :style="{
+          backgroundColor: isActive(tag) ? $store.getters.cssVar.menuBg : '',
+          borderColor: isActive(tag) ? $store.getters.cssVar.menuBg : ''
+        }"
+        @contextmenu.prevent="openMenu($event, index)"
+      >
+        {{ tag.title }}
+        <i
+          v-show="!isActive(tag)"
+          class="el-icon-close"
+          @click.prevent.stop="onCloseClick(index)"
+        ></i>
+      </router-link>
+    </el-scrollbar>
+    <!-- 右击菜单 -->
+    <context-menu
+      v-show="visible"
+      :style="menuStyle"
+      :index="selectIndex"
+    ></context-menu>
   </div>
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router'
+import ContextMenu from './ContextMenu.vue'
+import { ref, reactive, watch } from 'vue'
+import { useStore } from 'vuex'
 
 const route = useRoute()
+const store = useStore()
 
 // 是否被选中
 const isActive = (tag) => {
@@ -32,7 +45,39 @@ const isActive = (tag) => {
 }
 
 // 关闭
-const onCloseClick = (index) => {}
+const onCloseClick = (index) => {
+  store.commit('app/removeTagsView', {
+    type: 'index',
+    index: index
+  })
+}
+
+// contextMenu 相关
+const selectIndex = ref(0)
+const visible = ref(false)
+const menuStyle = reactive({
+  left: 0,
+  top: 0
+})
+const openMenu = (e, index) => {
+  // 定义位置
+  const { x, y } = e
+  menuStyle.left = x + 'px'
+  menuStyle.top = y + 'px'
+  selectIndex.value = index
+  visible.value = true
+}
+// 关闭
+const closeMenu = () => {
+  visible.value = false
+}
+watch(visible, (val) => {
+  if (val) {
+    document.body.addEventListener('click', closeMenu)
+  } else {
+    document.body.removeEventListener('click', closeMenu)
+  }
+})
 </script>
 
 <style lang="scss" scoped>
